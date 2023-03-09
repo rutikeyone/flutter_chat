@@ -19,6 +19,8 @@ class SignUpFailure extends Failure with _$SignUpFailure {
 
 class SignOutFailure extends Failure {}
 
+class FacebookSignOutFailure extends Failure {}
+
 @freezed
 class SignInFailure extends Failure with _$SignInFailure {
   const factory SignInFailure.unknown() = _SignInUnknownFailure;

@@ -15,6 +15,8 @@ abstract class AuthenticationDataSource {
 
   Future<void> signOut();
 
+  Future<void> facebookSignOut();
+
   FutureOr<UserEntity?> getUserData(String userId);
 
   Future<UserEntity?> getUserDataWithGoogle();
@@ -71,5 +73,10 @@ class AuthenticationDataSourceImpl extends AuthenticationDataSource {
     final userModel = UserModel.fromFacebookJson(userData);
     final userEntity = userModel.toEntity();
     return userEntity;
+  }
+
+  @override
+  Future<void> facebookSignOut() {
+    return _facebookAuth.logOut();
   }
 }

@@ -146,13 +146,20 @@ class AuthenticationController extends StateNotifier<AuthenticationState> {
   }
 
   Future<void> signOut() async {
-    await state.whenOrNull(authenticated: (_) async {
-      await _authenticationRepository.signOut();
-      await _localStorageClearAuthenticationStatusUseCase.call(NoParams());
-    }, authenticatedWithGoogle: (_) async {
-      await _authenticationRepository.signOut();
-      await _localStorageClearAuthenticationStatusUseCase.call(NoParams());
-    });
+    await state.whenOrNull(
+      authenticated: (_) async {
+        await _authenticationRepository.signOut();
+        await _localStorageClearAuthenticationStatusUseCase.call(NoParams());
+      },
+      authenticatedWithGoogle: (_) async {
+        await _authenticationRepository.signOut();
+        await _localStorageClearAuthenticationStatusUseCase.call(NoParams());
+      },
+      authenticatedWithFacebook: (_) async {
+        await _authenticationRepository.facebookSignOut();
+        await _localStorageClearAuthenticationStatusUseCase.call(NoParams());
+      },
+    );
     state = const AuthenticationState.unAuthenticated();
   }
 

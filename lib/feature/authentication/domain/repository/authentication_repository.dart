@@ -10,6 +10,8 @@ abstract class AuthenticationRepository {
 
   Future<Either<SignOutFailure, void>> signOut();
 
+  Future<Either<FacebookSignOutFailure, void>> facebookSignOut();
+
   Future<Either<GetUserFailure, UserEntity>> getUserData(String userId);
 
   Future<Either<GetUserWithGoogleFailure, UserEntity?>> getUserDataWithGoogle();

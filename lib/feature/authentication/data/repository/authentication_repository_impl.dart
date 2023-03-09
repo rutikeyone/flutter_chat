@@ -57,4 +57,13 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       return Left(GetUserWithFacebookFailure());
     }
   }
+
+  @override
+  Future<Either<FacebookSignOutFailure, void>> facebookSignOut() async {
+    try {
+      return Right(await _authenticationDataSource.facebookSignOut());
+    } catch (_) {
+      return Left(FacebookSignOutFailure());
+    }
+  }
 }
